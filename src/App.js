@@ -5,8 +5,6 @@ import Categories from "./pages/Categories";
 import ProductPage, { CartContext } from "./pages/ProductPage";
 import { useEffect, useState } from "react";
 import Footer from "./components/Footer";
-import CartItem from "./components/CartItem";
-import CartWithItems from "./components/CartWithItems";
 
 function App() {
   const [cartItem, setCartItem] = useState([]);

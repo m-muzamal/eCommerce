@@ -1,19 +1,24 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useMemo, useState } from "react";
 import "../stylesheets/ProductPage.css";
 import { items } from "../data/AllData";
 import TrendingSlider from "../components/TrendingSlider";
 import Newsletter from "../components/Newsletter";
-import Footer from "../components/Footer";
 import { useParams } from "react-router";
+import Notification from "../components/Notification";
 
 export const CartContext = createContext();
 
 function ProductPage() {
   const { id } = useParams();
-  const item = items.filter((item) => item.id === parseInt(id));
+  const [image, setImage] = useState();
+
+  const item = useMemo(() => {
+    const x = items.filter((item) => item.id === parseInt(id));
+    setImage(x[0].img);
+    return x;
+  }, [id]);
 
   const [quantity, setQuantity] = useState(1);
-  const [image, setImage] = useState(item[0].img);
 
   const { addToCart } = useContext(CartContext);
 
@@ -40,17 +45,21 @@ function ProductPage() {
   const [notify, setNotify] = useState(false);
 
   const showNotify = () => {
-    setNotify(!notify);
+    setNotify(true);
+    setTimeout(() => {
+      setNotify(false);
+    }, 1700);
   };
 
   return (
     <>
-      <div
+      {/* <div
         onAnimationEnd={() => setNotify(false)}
         className={`notify ${notify ? "slide-in" : ""}`}
       >
         <p>Item has been added to the cart &nbsp; ✅</p>
-      </div>
+      </div> */}
+      {notify && <Notification message={"Item has been added to the cart ✅"} />}
 
       <div className="product-page-div">
         <div className="container">
@@ -121,7 +130,6 @@ function ProductPage() {
         </div>
         <TrendingSlider />
         <Newsletter />
-        <Footer />
       </div>
     </>
   );

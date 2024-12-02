@@ -10,7 +10,7 @@ function ProductItem() {
       {filteredItems.map((item) => (
         <div key={item.id} className="product normal">
           <Link
-            onClick={() => window.top(0, 0)}
+            onClick={() => window.scrollTo(0, 0)}
             to={`/categories/product/${item.id}`}
           >
             <div className="product-header">
