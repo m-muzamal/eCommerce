@@ -1,5 +1,5 @@
-import "./TrendingSlider.css";
-import { items } from "./AllData";
+import "../stylesheets/TrendingSlider.css";
+import { items } from "../data/AllData";
 import { Link } from "react-router-dom";
 
 function TrendingItem() {

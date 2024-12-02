@@ -1,5 +1,5 @@
-import "./ProudProducts.css";
-import { items } from "./AllData";
+import "../stylesheets/ProudProducts.css";
+import { items } from "../data/AllData";
 import { Link } from "react-router-dom";
 
 function ProductItem() {

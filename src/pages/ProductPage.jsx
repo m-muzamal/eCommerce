@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from "react";
-import "../components/ProductPage.css";
-import { items } from "../components/AllData";
+import "../stylesheets/ProductPage.css";
+import { items } from "../data/AllData";
 import TrendingSlider from "../components/TrendingSlider";
 import Newsletter from "../components/Newsletter";
 import Footer from "../components/Footer";

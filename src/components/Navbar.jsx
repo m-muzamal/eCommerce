@@ -1,4 +1,4 @@
-import "./Navbar.css";
+import "../stylesheets/Navbar.css";
 
 import LogoImg2 from "../img/logo2.png";
 import { Link } from "react-router-dom";
@@ -46,7 +46,7 @@ function Navbar() {
           <Link onClick={() => setMobileNav(!mobileNav)} to="/categories/all">
             categories
           </Link>
-          <Link onClick={() => setMobileNav(!mobileNav)} to="/categories/lamps">
+          <Link onClick={() => setMobileNav(!mobileNav)} to="/categories/lamp">
             lamps
           </Link>
           <Link

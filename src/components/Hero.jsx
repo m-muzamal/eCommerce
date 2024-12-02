@@ -1,4 +1,4 @@
-import "./Header.css";
+import "../stylesheets/Header.css";
 import Main1 from "../img/header/home-img-1.jpg";
 import Main2 from "../img/header/home-img-2.jpg";
 import Main3 from "../img/header/home-img-3.jpg";
@@ -12,7 +12,7 @@ function Hero() {
         <div className="container">
           <div className="grid-container">
             <div className="featured grid-one">
-              <Link to="categories/furnitures">
+              <Link to="categories/furniture">
                 <div id="img1" className="lil-overlay"></div>
                 <img src={Main1} alt="img1" />
                 <p className="main-description">Live Comfortably</p>
@@ -33,7 +33,7 @@ function Hero() {
               </Link>
             </div>
             <div className="featured grid-four-low">
-              <Link to="categories/electronics">
+              <Link to="categories/electronic">
                 <div id="img4" className="lil-overlay"></div>
                 <img src={Main4} alt="img4" />
                 <p className="main-description">Electronics</p>
