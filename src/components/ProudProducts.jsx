@@ -1,5 +1,5 @@
 import ProductItem from "./ProductItem";
-import "./ProudProducts.css";
+import "../stylesheets/ProudProducts.css";
 function ProudProducts() {
   return (
     <div className="proud-container">

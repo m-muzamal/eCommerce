@@ -1,16 +1,22 @@
 import { Link } from "react-router-dom";
-import { items } from "./AllData";
+import { items } from "../data/AllData";
+import { useMemo } from "react";
 
-function CategoriesItem() {
+function CategoriesItem({ category }) {
+  const filteredItems = useMemo(() => {
+    if (category === "all") return items;
+    return items.filter((item) => item.category === category);
+  }, [category]);
+
   return (
     <>
       <div className="proud-container">
         <div className="container">
           <div className="products-grid">
-            {items.map((item) => (
+            {filteredItems.map((item) => (
               <div key={item.id} className="product normal">
                 <Link
-                  onClick={() => window.top(0, 0)}
+                  onClick={() => window.scrollTo(0, 0)}
                   to={`/categories/product/${item.id}`}
                 >
                   <div className="product-header">

@@ -1,5 +1,5 @@
-import "./TrendingSlider.css";
-import { items } from "./AllData";
+import "../stylesheets/TrendingSlider.css";
+import { items } from "../data/AllData";
 import { Link } from "react-router-dom";
 
 function TrendingItem() {
@@ -9,7 +9,7 @@ function TrendingItem() {
       {filteredItems.map((item) => (
         <div key={item.id} className="row-item">
           <Link
-            onClick={() => window.top(0, 0)}
+            onClick={() => window.scrollTo(0, 0)}
             to={`/categories/product/${item.id}`}
           >
             <div className="item-header">

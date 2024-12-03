@@ -25,7 +25,6 @@ function Home() {
         img={Banner2}
       />
       <Newsletter />
-      <Footer />
     </>
   );
 }

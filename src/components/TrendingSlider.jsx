@@ -1,4 +1,4 @@
-import "./TrendingSlider.css";
+import "../stylesheets/TrendingSlider.css";
 import TrendingItem from "./TrendingItem";
 import { IconArrowLeft, IconArrowRight } from "@tabler/icons-react";
 

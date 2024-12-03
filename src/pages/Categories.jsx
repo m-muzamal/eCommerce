@@ -1,12 +1,18 @@
-import "../components/ProudProducts.css";
+import "../stylesheets/ProudProducts.css";
 import CategoriesHeader from "../components/CategoriesHeader";
-import { Outlet } from "react-router";
+import { Outlet, useParams } from "react-router";
+import CategoriesItem from "../components/CategoriesItem";
+import Newsletter from "../components/Newsletter";
 
 function Categories() {
+  const { category } = useParams();
+
   return (
     <>
       <CategoriesHeader />
-      <Outlet />
+      <CategoriesItem category={category} />
+      <Newsletter />
+      {/* <Outlet /> */}
     </>
   );
 }
