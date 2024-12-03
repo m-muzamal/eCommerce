@@ -28,10 +28,15 @@
     height: 12rem;
 }
 
-.logo-img {
-    width: 8.5rem;
-    height: auto;
+.logo {
     cursor: pointer;
+    background-color: var(--red-color);
+    color: white;
+    padding: 1rem;
+    font-family: "Georgia", serif;
+    font-size: 2rem;
+    font-style: italic;
+    border-radius: 5px;
 }
 
 .nav-links {
@@ -282,7 +287,7 @@
     font-weight: 600;
 }
 
-.cart-right i {
+.cart-right > .close-icon {
     cursor: pointer;
 }
 

@@ -1,30 +1,16 @@
 import { Link } from "react-router-dom";
 import CartItem from "./CartItem";
-import { useContext, useEffect, useState } from "react";
-import { CartContext } from "../pages/ProductPage";
 import EmptyCart from "./EmptyCart";
+import { useSelector } from "react-redux";
 
 function CartWithItems() {
-  const { cartItem, setCartItem } = useContext(CartContext);
-
-  const [totalPrice, setTotalPrice] = useState(0);
-
-  useEffect(() => {
-    const newTotalPrice = cartItem.reduce((acc, item) => acc + item.price, 0);
-    setTotalPrice(newTotalPrice);
-  }, [cartItem]);
+  const { items, totalPrice, totalItems } = useSelector((state) => state.cart);
 
   return (
     <>
       <div className="full-cart-div">
         <div className="full-cart">
-          {cartItem.map((item, id) =>
-            cartItem.length !== 0 ? (
-              <CartItem key={id} item={item} setCartItem={setCartItem} />
-            ) : (
-              <EmptyCart key={id} />
-            )
-          )}
+          {items.length !== 0 ? <CartItem /> : <EmptyCart />}
         </div>
       </div>
       <div className="subtotal-div">

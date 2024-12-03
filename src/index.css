@@ -7,6 +7,13 @@
   scroll-behavior: smooth;
 }
 
+:root {
+  --primary-color: #E5E5E5;
+  --secondary-color: #717171;
+  --red-color: #B6002C;
+  --box-shadow: 0px 4px 5px -5px rgba(0, 0, 0, 0.23);
+}
+
 body {
   font-family: 'Blinker', sans-serif;
   position: relative;
