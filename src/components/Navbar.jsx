@@ -86,12 +86,6 @@ function Navbar() {
         <div className="container">
           <div className={`nav-container ${sticky ? "cont-sticky" : ""}`}>
             <Link to="/">
-              {/* <img
-                onClick={scrollToTop}
-                src={LogoImg2}
-                alt="logo"
-                className="logo-img"
-              /> */}
               <h1 className="logo">ShopSphere</h1>
             </Link>
             <div className="nav-links">
