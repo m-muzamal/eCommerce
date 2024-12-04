@@ -1,20 +1,21 @@
 import "../stylesheets/Navbar.css";
 import { Link } from "react-router-dom";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import CartWithItems from "./CartWithItems";
 import EmptyCart from "./EmptyCart";
-import { CartContext } from "../pages/ProductPage";
 import { IconMenu2, IconShoppingCart, IconX } from "@tabler/icons-react";
 import { useSelector } from "react-redux";
+import AuthModal from "../modals/AuthModal";
+import Login from "../components/Login";
+import Register from "../components/Register";
 
 function Navbar() {
   const { items, totalItems } = useSelector((state) => state.cart);
-  console.log(items);
+  const [open, setOpen] = useState(false);
   const [sticky, setSticky] = useState(false);
   const [mobileNav, setMobileNav] = useState(false);
   const [cart, setCart] = useState(false);
-
-  const { cartItem } = useContext(CartContext);
+  const [login, setLogin] = useState(false);
 
   const handleScroll = () => {
     if (window.scrollY > 10) {
@@ -32,6 +33,13 @@ function Navbar() {
 
   return (
     <>
+      <AuthModal open={open} setOpen={setOpen}>
+        {login ? (
+          <Register setLogin={setLogin} />
+        ) : (
+          <Login setLogin={setLogin} />
+        )}
+      </AuthModal>
       <div
         className={`mobile-nav-full ${mobileNav ? "open-flex" : "closed-flex"}`}
       >
@@ -78,12 +86,7 @@ function Navbar() {
               <Link onClick={() => window.scrollTo(0, 0)} to="/categories/all">
                 categories
               </Link>
-              <Link
-                onClick={() => window.scrollTo(0, 0)}
-                to="/categories/product/19"
-              >
-                product page
-              </Link>
+              <a onClick={() => setOpen(true)}>Login</a>
               <i
                 data-array-length={totalItems}
                 onClick={openCart}
