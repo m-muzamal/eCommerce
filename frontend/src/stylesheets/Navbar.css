@@ -287,7 +287,7 @@
     font-weight: 600;
 }
 
-.cart-right > .close-icon {
+.cart-right>.close-icon {
     cursor: pointer;
 }
 
@@ -417,9 +417,9 @@
         align-items: center;
     }
 
-    /* .full-cart-div {
-        height: 63%;
-    } */
+    .full-cart-div {
+        height: 65%;
+    }
 }
 
 .x-mobile {

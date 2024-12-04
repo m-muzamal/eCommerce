@@ -1,6 +1,6 @@
 import "../stylesheets/ProudProducts.css";
 import CategoriesHeader from "../components/CategoriesHeader";
-import { Outlet, useParams } from "react-router";
+import { useParams } from "react-router";
 import CategoriesItem from "../components/CategoriesItem";
 import Newsletter from "../components/Newsletter";
 

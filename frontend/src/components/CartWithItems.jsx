@@ -4,7 +4,7 @@ import EmptyCart from "./EmptyCart";
 import { useSelector } from "react-redux";
 
 function CartWithItems() {
-  const { items, totalPrice, totalItems } = useSelector((state) => state.cart);
+  const { items, totalPrice } = useSelector((state) => state.cart);
 
   return (
     <>
