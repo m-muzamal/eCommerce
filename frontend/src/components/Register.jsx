@@ -17,7 +17,6 @@ const Register = ({ setLogin }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(input);
   };
 
   return (

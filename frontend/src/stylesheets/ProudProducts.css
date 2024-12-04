@@ -108,7 +108,31 @@ a {
     justify-content: center;
 }
 
+.pagination {
+    grid-column: 1/5;
+    display: grid;
+    justify-content: center;
+    margin-top: 2rem;
+}
 
+.pagination .MuiPaginationItem-root {
+    font-size: 14px;
+    color: #333;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.pagination .MuiPaginationItem-root:hover {
+    background-color: var(--primary-color);
+    color: #000;
+    border-radius: 0% !important;
+}
+
+.pagination .Mui-selected {
+    background-color: #191919 !important;
+    border-radius: 0% !important;
+    color: #fff !important;
+}
 
 /* queries */
 
