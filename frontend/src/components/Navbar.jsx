@@ -4,19 +4,21 @@ import { useState } from "react";
 import CartWithItems from "./CartWithItems";
 import EmptyCart from "./EmptyCart";
 import { IconMenu2, IconShoppingCart, IconX } from "@tabler/icons-react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import AuthModal from "../modals/AuthModal";
 import Login from "../components/Login";
 import Register from "../components/Register";
+import { logout } from "../redux/User/userSlice";
 
 function Navbar() {
-  const [login, setLogin] = useState(false);
-  const { items, totalItems } = useSelector((state) => state.cart);
+  const { user, accessToken } = useSelector((state) => state.user);
+  const { totalItems } = useSelector((state) => state.cart);
   const [open, setOpen] = useState(false);
   const [sticky, setSticky] = useState(false);
   const [mobileNav, setMobileNav] = useState(false);
   const [cart, setCart] = useState(false);
   const [loginModal, setLoginModal] = useState(false);
+  const dispatch = useDispatch();
 
   const handleScroll = () => {
     if (window.scrollY > 10) {
@@ -32,13 +34,17 @@ function Navbar() {
 
   window.addEventListener("scroll", handleScroll);
 
+  const handleLogout = () => {
+    dispatch(logout());
+  };
+
   return (
     <>
       <AuthModal open={open} setOpen={setOpen}>
         {loginModal ? (
-          <Register setLogin={setLoginModal} />
+          <Register setLogin={setLoginModal} setOpen={setOpen} />
         ) : (
-          <Login setLogin={setLoginModal} />
+          <Login setLogin={setLoginModal} setOpen={setOpen} />
         )}
       </AuthModal>
       <div
@@ -52,10 +58,10 @@ function Navbar() {
           <Link onClick={() => setMobileNav(!mobileNav)} to="/categories/all">
             categories
           </Link>
-          {login ? (
-            <a onClick={() => setOpen(true)}>Login</a>
+          {accessToken ? (
+            <a onClick={handleLogout}>Log Out</a>
           ) : (
-            <a onClick={() => setOpen(true)}>Log Out</a>
+            <a onClick={() => setOpen(true)}>Login</a>
           )}
         </div>
       </div>
@@ -89,7 +95,7 @@ function Navbar() {
               <h1 className="logo">ShopSphere</h1>
             </Link>
             <div className="nav-links">
-              <a className="name">Muhammad</a>
+              {accessToken && <a className="name">{user.user.name}</a>}
               <NavLink
                 onClick={() => window.scrollTo(0, 0)}
                 to="/categories/all"
@@ -99,10 +105,10 @@ function Navbar() {
               >
                 categories
               </NavLink>
-              {login ? (
-                <a onClick={() => setOpen(true)}>Login</a>
+              {accessToken ? (
+                <a onClick={handleLogout}>Log Out</a>
               ) : (
-                <a onClick={() => setOpen(true)}>Log Out</a>
+                <a onClick={() => setOpen(true)}>Login</a>
               )}
               <i
                 data-array-length={totalItems}

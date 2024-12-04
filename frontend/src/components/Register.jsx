@@ -1,24 +1,51 @@
 import React, { useState } from "react";
 import "../stylesheets/Login.css";
 import { IoIosEye, IoIosEyeOff } from "react-icons/io";
+import { signupUser } from "../utils/APIs";
+import { useDispatch, useSelector } from "react-redux";
+import { setUser } from "../redux/User/userSlice";
 
-const Register = ({ setLogin }) => {
+const Register = ({ setLogin, setOpen }) => {
+  const { user: x, accessToken: y } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
   const [visible, setVisible] = useState(false);
-  const [err, setErr] = useState("Somting went wrong!");
+  const [err, setErr] = useState("");
   const [input, setInput] = useState({
     name: "",
     email: "",
     password: "",
+    confirmPassword: "",
   });
 
   const handleChange = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const passwordValidate = () => {
+    if (input.password === input.confirmPassword) {
+      return true;
+    } else {
+      return false;
+    }
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const validate = await passwordValidate();
+      if (!validate) throw new Error("Confirm password should be same!");
+      const { user, accessToken } = await signupUser(input);
+      setErr("");
+      dispatch(setUser({ user, accessToken }));
+      alert("User Sign Up successfully!");
+      setOpen(false);
+    } catch (err) {
+      setErr(err.message);
+    }
+  };
+  
+  console.log("User:", x)
+  console.log("token:", y)
   return (
     <section className="container login-section">
       <form onSubmit={handleSubmit}>
@@ -46,6 +73,23 @@ const Register = ({ setLogin }) => {
             placeholder="Password"
             name="password"
             value={input.password}
+            required
+            onChange={handleChange}
+          />
+          <span>
+            {visible ? (
+              <IoIosEyeOff onClick={() => setVisible(!visible)} />
+            ) : (
+              <IoIosEye onClick={() => setVisible(!visible)} />
+            )}
+          </span>
+        </div>
+        <div className="password-input">
+          <input
+            type={visible ? "text" : "password"}
+            placeholder="Confirm password"
+            name="confirmPassword"
+            value={input.confirmPassword}
             required
             onChange={handleChange}
           />

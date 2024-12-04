@@ -7,11 +7,7 @@ import {
 } from "../redux/Cart/cartSlice";
 
 function CartItem() {
-  const {
-    items: cartItems,
-    totalPrice,
-    totalItems,
-  } = useSelector((state) => state.cart);
+  const { items: cartItems, totalPrice } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
   return (
@@ -34,8 +30,11 @@ function CartItem() {
             </div>
           </div>
           <div className="cart-right">
-            <p className="cart-price">{totalPrice}.00$</p>
-            <IconX className="close-icon" onClick={() => dispatch(removeFromCart(item.id))} />
+            <p className="cart-price">{item.price * item.quantity}.00$</p>
+            <IconX
+              className="close-icon"
+              onClick={() => dispatch(removeFromCart(item.id))}
+            />
           </div>
         </div>
       ))}
