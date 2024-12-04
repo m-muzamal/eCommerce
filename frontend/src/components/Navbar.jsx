@@ -1,5 +1,5 @@
 import "../stylesheets/Navbar.css";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useState } from "react";
 import CartWithItems from "./CartWithItems";
 import EmptyCart from "./EmptyCart";
@@ -10,12 +10,13 @@ import Login from "../components/Login";
 import Register from "../components/Register";
 
 function Navbar() {
+  const [login, setLogin] = useState(false);
   const { items, totalItems } = useSelector((state) => state.cart);
   const [open, setOpen] = useState(false);
   const [sticky, setSticky] = useState(false);
   const [mobileNav, setMobileNav] = useState(false);
   const [cart, setCart] = useState(false);
-  const [login, setLogin] = useState(false);
+  const [loginModal, setLoginModal] = useState(false);
 
   const handleScroll = () => {
     if (window.scrollY > 10) {
@@ -34,10 +35,10 @@ function Navbar() {
   return (
     <>
       <AuthModal open={open} setOpen={setOpen}>
-        {login ? (
-          <Register setLogin={setLogin} />
+        {loginModal ? (
+          <Register setLogin={setLoginModal} />
         ) : (
-          <Login setLogin={setLogin} />
+          <Login setLogin={setLoginModal} />
         )}
       </AuthModal>
       <div
@@ -51,6 +52,11 @@ function Navbar() {
           <Link onClick={() => setMobileNav(!mobileNav)} to="/categories/all">
             categories
           </Link>
+          {login ? (
+            <a onClick={() => setOpen(true)}>Login</a>
+          ) : (
+            <a onClick={() => setOpen(true)}>Log Out</a>
+          )}
         </div>
       </div>
 
@@ -83,10 +89,21 @@ function Navbar() {
               <h1 className="logo">ShopSphere</h1>
             </Link>
             <div className="nav-links">
-              <Link onClick={() => window.scrollTo(0, 0)} to="/categories/all">
+              <a className="name">Muhammad</a>
+              <NavLink
+                onClick={() => window.scrollTo(0, 0)}
+                to="/categories/all"
+                style={({ isActive }) => ({
+                  textDecoration: isActive ? "underline" : "none",
+                })}
+              >
                 categories
-              </Link>
-              <a onClick={() => setOpen(true)}>Login</a>
+              </NavLink>
+              {login ? (
+                <a onClick={() => setOpen(true)}>Login</a>
+              ) : (
+                <a onClick={() => setOpen(true)}>Log Out</a>
+              )}
               <i
                 data-array-length={totalItems}
                 onClick={openCart}

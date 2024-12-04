@@ -59,6 +59,10 @@
     cursor: pointer;
 }
 
+.name {
+    color: rgba(0, 0, 0, 0.5) !important;
+}
+
 /* hamburget menu */
 
 .hamburger-menu {
