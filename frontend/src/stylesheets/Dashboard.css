@@ -91,11 +91,11 @@ td:nth-child(7) svg:hover {
     color: var(--red-color);
 }
 
-td:nth-child(3) {
+.prod_name {
     cursor: pointer;
 }
 
-td:nth-child(3):hover {
+.prod_name:hover {
     text-decoration: underline;
 }
 

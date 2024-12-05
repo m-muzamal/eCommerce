@@ -96,16 +96,18 @@ function Navbar() {
             </Link>
             <div className="nav-links">
               {accessToken && <a className="name">{user.user.name}</a>}
-              <NavLink
-                onClick={() => window.scrollTo(0, 0)}
-                to="/dashboard"
-                style={({ isActive }) => ({
-                  textDecoration: isActive ? "underline" : "none",
-                  color: isActive ? "#B6002C" : "#000",
-                })}
-              >
-                Dashboard
-              </NavLink>
+              {accessToken && user.user.isAdmin && (
+                <NavLink
+                  onClick={() => window.scrollTo(0, 0)}
+                  to="/dashboard"
+                  style={({ isActive }) => ({
+                    textDecoration: isActive ? "underline" : "none",
+                    color: isActive ? "#B6002C" : "#000",
+                  })}
+                >
+                  Dashboard
+                </NavLink>
+              )}
               <NavLink
                 onClick={() => window.scrollTo(0, 0)}
                 to="/"

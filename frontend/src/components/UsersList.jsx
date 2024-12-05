@@ -1,8 +1,17 @@
 import React from "react";
-import { items } from "../data/AllData";
 import { MdOutlineDeleteForever } from "react-icons/md";
+import { Switch } from "@mui/material";
 
-const UsersList = () => {
+const UsersList = ({ users }) => {
+  const formatDate = (isoDate) => {
+    const date = new Date(isoDate);
+    return date.toLocaleDateString("en-GB", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    });
+  };
+
   const handleDelet = () => {
     console.log("delet user");
   };
@@ -15,17 +24,21 @@ const UsersList = () => {
             <th>No.</th>
             <th>Name</th>
             <th>Email</th>
+            <th>Registered At</th>
             <th>Is Admin</th>
             <th className="lastTitle">Delete</th>
           </tr>
         </thead>
         <tbody>
-          {items.map((item, index) => (
-            <tr key={item.id}>
+          {users.map((user, index) => (
+            <tr key={user._id}>
               <td className="row">{index + 1}</td>
-              <td className="row">Muhammad Muzammal </td>
-              <td className="row">{item.specs.slice(0, 45)}...</td>
-              <td className="row">{item.category}</td>
+              <td className="row">{user.name}</td>
+              <td className="row">{user.email}</td>
+              <td className="row">{formatDate(user.createdAt)}</td>
+              <td className="row">
+                <Switch />
+              </td>
               <td className="last">
                 <MdOutlineDeleteForever onClick={handleDelet} />
               </td>

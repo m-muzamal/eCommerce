@@ -12,7 +12,6 @@ function Categories() {
       <CategoriesHeader />
       <CategoriesItem category={category} />
       <Newsletter />
-      {/* <Outlet /> */}
     </>
   );
 }

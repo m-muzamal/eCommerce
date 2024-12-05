@@ -33,6 +33,7 @@ const ProductList = () => {
                 <Link
                   onClick={() => window.scrollTo(0, 0)}
                   to={`/categories/product/${item.id}`}
+                  className="prod_name"
                 >
                   {item.description}
                 </Link>
