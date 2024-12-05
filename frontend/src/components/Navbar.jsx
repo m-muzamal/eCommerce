@@ -98,9 +98,30 @@ function Navbar() {
               {accessToken && <a className="name">{user.user.name}</a>}
               <NavLink
                 onClick={() => window.scrollTo(0, 0)}
+                to="/dashboard"
+                style={({ isActive }) => ({
+                  textDecoration: isActive ? "underline" : "none",
+                  color: isActive ? "#B6002C" : "#000",
+                })}
+              >
+                Dashboard
+              </NavLink>
+              <NavLink
+                onClick={() => window.scrollTo(0, 0)}
+                to="/"
+                style={({ isActive }) => ({
+                  textDecoration: isActive ? "underline" : "none",
+                  color: isActive ? "#B6002C" : "#000",
+                })}
+              >
+                Home
+              </NavLink>
+              <NavLink
+                onClick={() => window.scrollTo(0, 0)}
                 to="/categories/all"
                 style={({ isActive }) => ({
                   textDecoration: isActive ? "underline" : "none",
+                  color: isActive ? "#B6002C" : "#000",
                 })}
               >
                 categories

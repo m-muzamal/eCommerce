@@ -5,6 +5,7 @@ import Categories from "./pages/Categories";
 import ProductPage, { CartContext } from "./pages/ProductPage";
 import { useEffect, useState } from "react";
 import Footer from "./components/Footer";
+import Dashboard from "./pages/Dashboard";
 
 function App() {
   const [cartItem, setCartItem] = useState([]);
@@ -34,6 +35,7 @@ function App() {
         <Route index path="/" element={<Home />} />
         <Route path="categories/:category" element={<Categories />} />
         <Route path="categories/product/:id" element={<ProductPage />} />
+        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
       <Footer />
     </CartContext.Provider>
