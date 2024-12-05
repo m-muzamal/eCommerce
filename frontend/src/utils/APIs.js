@@ -6,11 +6,15 @@ const API_URL = process.env.REACT_APP_USER_API;
 const getAllUsers = async (accessToken) => {
   try {
     if (!API_URL) throw new Error("API_URL is not defined");
-    const response = await axios.get(`${API_URL}/all-users`, accessToken);
+    const response = await axios.get(`${API_URL}/all-users`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
     return response.data;
   } catch (error) {
     console.error("Error fetching users:", error);
-    throw error;
+    throw error.response.data;
   }
 };
 

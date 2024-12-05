@@ -34,7 +34,8 @@ export const signin = async (req, res) => {
   const user = await User.findOne({ email: req.body.email });
   if (!user) return res.status(404).json({ message: "User not found!" });
   const isMatch = await bcrypt.compare(req.body.password, user.password);
-  if (!isMatch) return res.status(400).json({ message: "Invalid credentials!" });
+  if (!isMatch)
+    return res.status(400).json({ message: "Invalid credentials!" });
   const { password, ...rest } = user._doc;
   const token = createToken(rest._id, rest.email);
   res.json({
@@ -49,6 +50,8 @@ export const getAllUsers = async (req, res) => {
     _id: 1,
     name: 1,
     email: 1,
+    isAdmin: 1,
+    createdAt: 1,
   });
   if (!users) return res.status(404).json({ message: "No users found!" });
   res.status(200).json({ users });

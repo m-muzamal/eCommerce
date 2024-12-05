@@ -1,0 +1,112 @@
+.dashboard {
+    min-height: 100vh;
+    background-color: var(--primary-color);
+}
+
+.dashboard_container {
+    margin-top: 12rem;
+    padding: 5rem 0;
+}
+
+/* dashboard header */
+.dash_header {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--secondary-color);
+    align-items: center;
+}
+
+.dash_header ul {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+    cursor: pointer;
+    font-size: 18px;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.active {
+    text-decoration: underline;
+    color: var(--red-color);
+}
+
+/* user & product list  */
+.content {
+    display: flex;
+    flex-direction: column;
+    margin-top: 2rem;
+}
+
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 .5rem;
+}
+
+thead,
+tbody {
+    text-align: center;
+    margin: 1rem;
+    font-size: 18px;
+    background-color: #fff;
+}
+
+th {
+    padding: 1rem;
+    border-bottom: 1px solid #ddd;
+}
+
+.row {
+    padding: 1.5rem;
+}
+
+th:nth-child(1) {
+    border-radius: 5px 0 0 0;
+}
+
+.lastTitle,
+th:nth-child(7) {
+    border-radius: 0 5px 0 0;
+}
+
+td:nth-child(1) {
+    border-radius: 5px 0 0 5px;
+}
+
+.last,
+td:nth-child(7) {
+    border-radius: 0 5px 5px 0;
+    font-size: 24px;
+    cursor: pointer;
+    padding-top: 1rem;
+}
+
+.last :hover {
+    color: var(--red-color);
+}
+
+td:nth-child(7) svg:hover {
+    color: var(--red-color);
+}
+
+.prod_name {
+    cursor: pointer;
+}
+
+.prod_name:hover {
+    text-decoration: underline;
+}
+
+.img {
+    height: 50%;
+    width: 50px;
+    object-fit: contain;
+}
+
+.img img {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+}
