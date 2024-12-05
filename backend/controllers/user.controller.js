@@ -56,3 +56,22 @@ export const getAllUsers = async (req, res) => {
   if (!users) return res.status(404).json({ message: "No users found!" });
   res.status(200).json({ users });
 };
+
+export const updateUser = async (req, res) => {
+  const { id, isAdmin } = req.body;
+  await User.findByIdAndUpdate({ _id: id }, { isAdmin }).select({
+    password: 0,
+  });
+  const user = await User.findOne({ _id: id });
+  if (!user) return res.status(404).json({ message: "User not found!" });
+  res.json({
+    message: "User updated successfully!",
+    user,
+  });
+};
+
+export const deleteUser = async (req, res) => {
+  const { id } = req.body;
+  await User.findByIdAndDelete({ _id: id });
+  res.json({ message: "User deleted successfully!" });
+};
