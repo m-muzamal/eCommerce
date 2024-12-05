@@ -44,4 +44,23 @@ const loginUser = async (credentials) => {
   }
 };
 
-export { getAllUsers, signupUser, loginUser };
+const updateUser = async (id, isAdmin, accessToken) => {
+  try {
+    if (!API_URL) throw new Error("API_URL is not defined");
+    const response = await axios.patch(
+      `${API_URL}/update-user`,
+      { id, isAdmin },
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error Updating user:", error);
+    throw error.response.data;
+  }
+};
+
+export { getAllUsers, signupUser, loginUser, updateUser };

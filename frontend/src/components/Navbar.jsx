@@ -35,7 +35,8 @@ function Navbar() {
   window.addEventListener("scroll", handleScroll);
 
   const handleLogout = () => {
-    dispatch(logout());
+    console.log("logout");
+    dispatch(logout(user?.user._id));
   };
 
   return (
