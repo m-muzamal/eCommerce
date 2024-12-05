@@ -1,10 +1,15 @@
 import React, { useState } from "react";
 import "../stylesheets/Login.css";
 import { IoIosEye, IoIosEyeOff } from "react-icons/io";
+import { loginUser } from "../utils/APIs";
+import { useDispatch, useSelector } from "react-redux";
+import { setUser } from "../redux/User/userSlice";
 
-const Login = ({ setLogin }) => {
+const Login = ({ setLogin, setOpen }) => {
+  const { user: x, accessToken: y } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
   const [visible, setVisible] = useState(false);
-  const [err, setErr] = useState("Somting went wrong!");
+  const [err, setErr] = useState("");
   const [input, setInput] = useState({
     email: "",
     password: "",
@@ -14,10 +19,21 @@ const Login = ({ setLogin }) => {
     setInput({ ...input, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    try {
+      const { user, accessToken } = await loginUser(input);
+      setErr("");
+      dispatch(setUser({ user, accessToken }));
+      alert("User logged in successfully!");
+      setOpen(false);
+    } catch (err) {
+      setErr(err.message);
+    }
   };
 
+  console.log("User:", x);
+  console.log("Token:", y);
   return (
     <section className="container login-section">
       <form onSubmit={handleSubmit}>

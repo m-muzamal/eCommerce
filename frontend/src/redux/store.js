@@ -1,18 +1,25 @@
 import { configureStore } from "@reduxjs/toolkit";
-import cartSlice from "./Cart/cartSlice";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import cartSlice from "./Cart/cartSlice";
+import userSlice from "./User/userSlice";
 
-const persistConfig = {
+const persistCart = {
   key: "cart",
   storage,
 };
+const persistUser = {
+  key: "user",
+  storage,
+};
 
-const persistedCartReducer = persistReducer(persistConfig, cartSlice);
+const persistedCartReducer = persistReducer(persistCart, cartSlice);
+const persistedUserReducer = persistReducer(persistUser, userSlice);
 
 const store = configureStore({
   reducer: {
     cart: persistedCartReducer,
+    user: persistedUserReducer,
   },
 
   middleware: (getDefaultMiddleware) =>

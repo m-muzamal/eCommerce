@@ -10,6 +10,8 @@ export const requireAuth = async (req, res, next) => {
   }
   const token = authorization.split(" ")[1];
   try {
+    const jwtSecret = process.env.JWT_SECRET;
+    if (!jwtSecret) throw new Error("JWT Secret is not set!");
     const { _id } = jwt.verify(token, process.env.JWT_SECRET);
     req.user = await User.findOne({ _id }).select("_id");
     console.log("authorized");

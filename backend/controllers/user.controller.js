@@ -12,19 +12,19 @@ const createToken = (_id, email) => {
 export const signup = async (req, res) => {
   const isSignedUp = await User.findOne({ email: req.body.email });
   if (isSignedUp)
-    return res.status(409).json({ message: "User already exists" });
+    return res.status(409).json({ message: "User already exists!" });
   const hashedPassword = await bcrypt.hash(req.body.password, 10);
   const user = new User({
     ...req.body,
     password: hashedPassword,
   });
 
-  if (!user) return res.status(400).json({ message: "user creation failed" });
+  if (!user) return res.status(400).json({ message: "User creation failed!" });
   await user.save();
   const { password, ...rest } = user._doc;
   const token = createToken(rest._id, rest.email);
   res.status(201).json({
-    message: "User created successfully",
+    message: "User created successfully!",
     user: rest,
     accessToken: token,
   });
@@ -32,13 +32,13 @@ export const signup = async (req, res) => {
 
 export const signin = async (req, res) => {
   const user = await User.findOne({ email: req.body.email });
-  if (!user) return res.status(404).json({ message: "User not found" });
+  if (!user) return res.status(404).json({ message: "User not found!" });
   const isMatch = await bcrypt.compare(req.body.password, user.password);
-  if (!isMatch) return res.status(400).json({ message: "Invalid credentials" });
+  if (!isMatch) return res.status(400).json({ message: "Invalid credentials!" });
   const { password, ...rest } = user._doc;
   const token = createToken(rest._id, rest.email);
   res.json({
-    message: "User signed in successfully",
+    message: "User signed in successfully!",
     user: rest,
     accessToken: token,
   });
@@ -50,6 +50,6 @@ export const getAllUsers = async (req, res) => {
     name: 1,
     email: 1,
   });
-  if (!users) return res.status(404).json({ message: "No users found" });
+  if (!users) return res.status(404).json({ message: "No users found!" });
   res.status(200).json({ users });
 };
