@@ -56,7 +56,9 @@
     color: var(--red-color);
 }
 
-.nav-links i {
+.nav-links i:hover {
+    text-decoration: underline;
+    color: var(--red-color);
     cursor: pointer;
 }
 
