@@ -1,9 +1,9 @@
 import React from "react";
 import { MdOutlineDeleteForever } from "react-icons/md";
 import { Switch } from "@mui/material";
-import { updateUser } from "../utils/APIs";
+import { deleteUser, updateUser } from "../utils/APIs";
 import { useDispatch, useSelector } from "react-redux";
-import { updateUserInStore } from "../redux/User/userSlice";
+import { logout, removeUser, updateUserInStore } from "../redux/User/userSlice";
 
 const UsersList = ({ accessToken }) => {
   const { allUsers: users } = useSelector((state) => state.user);
@@ -18,13 +18,19 @@ const UsersList = ({ accessToken }) => {
     });
   };
 
-  const handleDelet = () => {
-    console.log("delet user");
+  const handleDelet = async (id) => {
+    try {
+      await deleteUser(id, accessToken);
+      dispatch(removeUser(id));
+      dispatch(logout(id));
+    } catch (error) {
+      console.error("Error in delete user!", error);
+    }
   };
 
   const handleChange = async (id, isAdmin) => {
     try {
-      const updatedUser = await updateUser(id, isAdmin, accessToken);
+      await updateUser(id, isAdmin, accessToken);
       dispatch(updateUserInStore({ id, isAdmin }));
     } catch (error) {
       console.error("Error updating error:", error);
@@ -59,7 +65,7 @@ const UsersList = ({ accessToken }) => {
                 />
               </td>
               <td className="last">
-                <MdOutlineDeleteForever onClick={handleDelet} />
+                <MdOutlineDeleteForever onClick={() => handleDelet(user._id)} />
               </td>
             </tr>
           ))}

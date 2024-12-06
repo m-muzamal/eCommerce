@@ -31,10 +31,15 @@ const userSlice = createSlice({
         state.allUsers[userIndex].isAdmin = isAdmin;
       }
     },
+    removeUser: (state, action) => {
+      state.allUsers = state.allUsers.filter(
+        (user) => user._id !== action.payload
+      );
+    },
   },
 });
 
-export const { setUser, logout, setAllUsers, updateUserInStore } =
+export const { setUser, logout, setAllUsers, updateUserInStore, removeUser } =
   userSlice.actions;
 
 export default userSlice.reducer;

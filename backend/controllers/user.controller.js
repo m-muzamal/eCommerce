@@ -58,7 +58,8 @@ export const getAllUsers = async (req, res) => {
 };
 
 export const updateUser = async (req, res) => {
-  const { id, isAdmin } = req.body;
+  const { id } = req.params;
+  const { isAdmin } = req.body;
   await User.findByIdAndUpdate({ _id: id }, { isAdmin }).select({
     password: 0,
   });
@@ -71,7 +72,9 @@ export const updateUser = async (req, res) => {
 };
 
 export const deleteUser = async (req, res) => {
-  const { id } = req.body;
+  const { id } = req.params;
+  const user = await User.findById({ _id: id });
+  if (!user) return res.status(404).json({ message: "User not found!" });
   await User.findByIdAndDelete({ _id: id });
   res.json({ message: "User deleted successfully!" });
 };

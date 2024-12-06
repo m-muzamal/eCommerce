@@ -26,6 +26,10 @@
     cursor: pointer;
     font-weight: 500;
 }
+.dash_header li:hover {
+    text-decoration: underline;
+    color: var(--red-color);
+}
 
 .active {
     text-decoration: underline;
