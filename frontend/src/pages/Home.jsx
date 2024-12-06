@@ -1,3 +1,4 @@
+import Notification from "../common/Notification";
 import Banner from "../components/Banner";
 import BannerReverse from "../components/BannerReverse";
 import Footer from "../components/Footer";
@@ -11,6 +12,7 @@ import Banner2 from "../img/banner/banner2.jpg";
 function Home() {
   return (
     <>
+    <Notification/>
       <Hero />
       <ProudProducts />
       <Banner
